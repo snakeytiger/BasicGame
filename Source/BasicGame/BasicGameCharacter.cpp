@@ -43,6 +43,10 @@ ABasicGameCharacter::ABasicGameCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+	CharacterHealth = 5.0f;
+	StartingHealth = 5.0f;
+	IsAlive = true;
+
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 }
@@ -131,4 +135,8 @@ void ABasicGameCharacter::MoveRight(float Value)
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
+}
+
+void ABasicGameCharacter::Tick(float DeltaTime) {
+	Super::Tick(DeltaTime);
 }
