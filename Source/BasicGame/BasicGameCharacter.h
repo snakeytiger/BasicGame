@@ -21,6 +21,13 @@ class ABasicGameCharacter : public ACharacter
 public:
 	ABasicGameCharacter();
 
+	//Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+	//Health
+	UPROPERTY(EditAnywhere, BLueprintReadWrite, Category = "Stats")
+		float CharacterHealth;
+
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;
@@ -30,6 +37,12 @@ public:
 	float BaseLookUpRate;
 
 protected:
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stats")
+		float StartingHealth;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+		bool IsAlive;
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();
