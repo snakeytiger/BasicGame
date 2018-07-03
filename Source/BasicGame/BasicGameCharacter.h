@@ -28,6 +28,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		float CharacterHealth;
 
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		int GetCKey1();
+
+	UPROPERTY(BlueprintReadWrite, Category = "Combat")
+		int KeyNumber1;
+
 	UFUNCTION(BlueprintPure, Category = "Stats")
 		float GetStartingHealth();
 
@@ -40,6 +46,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		bool IsCrouch;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Timer")
+		float SlowTimeTime;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		float CombatValue;
@@ -66,6 +74,9 @@ protected:
 	
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 		void CombatQ();
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void CombatE();
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		bool IsAlive;
