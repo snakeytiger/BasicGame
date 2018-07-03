@@ -13,6 +13,19 @@ class ABasicGameGameMode : public AGameModeBase
 
 public:
 	ABasicGameGameMode();
+	
+	virtual void BeginPlay() override;
+
+protected:
+
+	//Widget class to use for the HUD screen
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "CustomWidget", meta = (BlueprintProtected = "true"))
+		TSubclassOf<class UUserWidget> HUDWidgetClass;
+
+	//The instance of the HUD
+	UPROPERTY()
+		class UUserWidget* CurrentWidget;
+
 };
 
 
