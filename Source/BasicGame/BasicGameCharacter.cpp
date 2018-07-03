@@ -47,6 +47,10 @@ ABasicGameCharacter::ABasicGameCharacter()
 	StartingHealth = 5.0f;
 	IsAlive = true;
 	IsCrouch = false;
+	InCombat = false;
+	KeyNumber1 = 0
+
+	SlowTimeTime = 3.0f;
 
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
@@ -62,6 +66,10 @@ void ABasicGameCharacter::SetupPlayerInputComponent(class UInputComponent* Playe
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+
+	//Combat Key Values
+	PlayerInputComponent->BindAction("CombatQ", IE_Pressed, this, &ABasicGameCharacter::CombatQ);
+	PlayerInputComponent->BindAction("CombatE", IE_Pressed, this, &ABasicGameCharacter::CombatE);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ABasicGameCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABasicGameCharacter::MoveRight);
@@ -161,4 +169,43 @@ void ABasicGameCharacter::UpdateHealth(float Damage) {
 	if (CharacterHealth == 0) {
 		IsAlive = false;
 	}
+}
+
+void ABasicGameCharacter::CombatQ() {
+	if (InCombat == true)
+	{
+		CombatValue = CombatValue + 1;
+	}
+	
+}
+
+void ABasicGameCharacter::CombatE() {
+	if (InCombat == true)
+	{
+		CombatValue = CombatValue + 1;
+	}
+
+}
+
+float ABasicGameCharacter::GetCombatValue() {
+
+	return CombatValue;
+}
+
+bool ABasicGameCharacter::CombatWin() {
+	if (CombatValue > 5) {
+
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+int ABasicGameCharacter::GetCKey1() {
+	int keynum = rand() % 4 + 1;
+	// 1 = Q, 2 = E, 3 = Z. 4 = C
+
+	return keynum;
+
 }
