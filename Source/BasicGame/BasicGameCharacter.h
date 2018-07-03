@@ -28,9 +28,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		float CharacterHealth;
 
-	UFUNCTION(BlueprintCallable, Category = "Combat")
-		int GetCKey1();
-
 	UPROPERTY(BlueprintReadWrite, Category = "Combat")
 		int KeyNumber1;
 
@@ -78,6 +75,12 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 		void CombatE();
 	
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void CombatZ();
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void CombatC();
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		bool IsAlive;
 

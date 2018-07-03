@@ -48,7 +48,6 @@ ABasicGameCharacter::ABasicGameCharacter()
 	IsAlive = true;
 	IsCrouch = false;
 	InCombat = false;
-	KeyNumber1 = 0
 
 	SlowTimeTime = 3.0f;
 
@@ -70,6 +69,8 @@ void ABasicGameCharacter::SetupPlayerInputComponent(class UInputComponent* Playe
 	//Combat Key Values
 	PlayerInputComponent->BindAction("CombatQ", IE_Pressed, this, &ABasicGameCharacter::CombatQ);
 	PlayerInputComponent->BindAction("CombatE", IE_Pressed, this, &ABasicGameCharacter::CombatE);
+	PlayerInputComponent->BindAction("CombatZ", IE_Pressed, this, &ABasicGameCharacter::CombatZ);
+	PlayerInputComponent->BindAction("CombatC", IE_Pressed, this, &ABasicGameCharacter::CombatC);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ABasicGameCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABasicGameCharacter::MoveRight);
@@ -187,6 +188,22 @@ void ABasicGameCharacter::CombatE() {
 
 }
 
+void ABasicGameCharacter::CombatZ() {
+	if (InCombat == true)
+	{
+		CombatValue = CombatValue + 1;
+	}
+
+}
+
+void ABasicGameCharacter::CombatC() {
+	if (InCombat == true)
+	{
+		CombatValue = CombatValue + 1;
+	}
+
+}
+
 float ABasicGameCharacter::GetCombatValue() {
 
 	return CombatValue;
@@ -200,12 +217,4 @@ bool ABasicGameCharacter::CombatWin() {
 	else {
 		return false;
 	}
-}
-
-int ABasicGameCharacter::GetCKey1() {
-	int keynum = rand() % 4 + 1;
-	// 1 = Q, 2 = E, 3 = Z. 4 = C
-
-	return keynum;
-
 }
