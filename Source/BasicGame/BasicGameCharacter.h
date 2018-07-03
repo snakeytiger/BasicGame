@@ -40,6 +40,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		bool IsCrouch;
 
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		float CombatValue;
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		float GetCombatValue();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		bool InCombat;
+
+
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;
@@ -52,10 +63,15 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stats")
 		float StartingHealth;
-
+	
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void CombatQ();
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		bool IsAlive;
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		bool CombatWin();
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();
