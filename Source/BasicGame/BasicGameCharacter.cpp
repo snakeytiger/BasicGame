@@ -46,6 +46,8 @@ ABasicGameCharacter::ABasicGameCharacter()
 	CharacterHealth = 5.0f;
 	StartingHealth = 5.0f;
 	IsAlive = true;
+	IsCrouch = false;
+
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
@@ -139,4 +141,24 @@ void ABasicGameCharacter::MoveRight(float Value)
 
 void ABasicGameCharacter::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
+}
+
+//Returns starting health
+float ABasicGameCharacter::GetStartingHealth() {
+
+	return StartingHealth;
+}
+
+float ABasicGameCharacter::GetCharacterHealth() {
+
+	return CharacterHealth;
+}
+
+void ABasicGameCharacter::UpdateHealth(float Damage) {
+
+	CharacterHealth = GetCharacterHealth() - Damage;
+
+	if (CharacterHealth == 0) {
+		IsAlive = false;
+	}
 }
