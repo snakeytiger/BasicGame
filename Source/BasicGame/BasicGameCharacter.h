@@ -24,6 +24,22 @@ public:
 	//Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	//Constantly increasing speed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+		float BaseSpeed;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+		float CurrentSpeed;
+
+	UFUNCTION(BlueprintPure, Category = "Stats")
+		float GetCurrentSpeed();
+
+	UFUNCTION(BlueprintPure, Category = "Stats")
+		float GetBaseSpeed();
+
+	UFUNCTION(BlueprintCallable, Category = "Stats")
+		void UpdateSpeed();
+
 	//Health
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		float CharacterHealth;
