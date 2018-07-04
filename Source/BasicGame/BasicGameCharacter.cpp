@@ -46,7 +46,7 @@ ABasicGameCharacter::ABasicGameCharacter()
 	CharacterHealth = 5.0f;
 	StartingHealth = 5.0f;
 	IsAlive = true;
-	IsCrouch = false;
+	Crouching = false;
 	InCombat = false;
 	CurrentKeyNum = 0;
 

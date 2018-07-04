@@ -38,7 +38,7 @@ public:
 		void UpdateHealth(float Damage);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
-		bool IsCrouch;
+		bool Crouching;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Timer")
 		float SlowTimeTime;
