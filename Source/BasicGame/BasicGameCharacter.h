@@ -38,7 +38,25 @@ public:
 		void UpdateHealth(float Damage);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
-		bool IsCrouch;
+		bool Crouching;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Timer")
+		float SlowTimeTime;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		float CombatValue;
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		float GetCombatValue();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		bool InCombat;
+
+
+	//Current Random Number
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		int CurrentKeyNum;
+
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -52,10 +70,30 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stats")
 		float StartingHealth;
-
 	
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void CombatQ();
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void CombatE();
+	
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void CombatZ();
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void CombatC();
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		bool IsAlive;
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		int KeyNumber();
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void AssignCurrnetKeyNum();
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		bool CombatWin();
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();

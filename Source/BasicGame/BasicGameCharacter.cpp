@@ -46,7 +46,11 @@ ABasicGameCharacter::ABasicGameCharacter()
 	CharacterHealth = 5.0f;
 	StartingHealth = 5.0f;
 	IsAlive = true;
-	IsCrouch = false;
+	Crouching = false;
+	InCombat = false;
+	CurrentKeyNum = 0;
+
+	SlowTimeTime = 3.0f;
 
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
@@ -62,6 +66,12 @@ void ABasicGameCharacter::SetupPlayerInputComponent(class UInputComponent* Playe
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+
+	//Combat Key Values
+	PlayerInputComponent->BindAction("CombatQ", IE_Pressed, this, &ABasicGameCharacter::CombatQ);
+	PlayerInputComponent->BindAction("CombatE", IE_Pressed, this, &ABasicGameCharacter::CombatE);
+	PlayerInputComponent->BindAction("CombatZ", IE_Pressed, this, &ABasicGameCharacter::CombatZ);
+	PlayerInputComponent->BindAction("CombatC", IE_Pressed, this, &ABasicGameCharacter::CombatC);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ABasicGameCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABasicGameCharacter::MoveRight);
@@ -161,4 +171,64 @@ void ABasicGameCharacter::UpdateHealth(float Damage) {
 	if (CharacterHealth == 0) {
 		IsAlive = false;
 	}
+}
+
+void ABasicGameCharacter::CombatQ() {
+	if ((InCombat == true) && (CurrentKeyNum == 1))
+	{
+		CombatValue = CombatValue + 1;
+	}
+	
+}
+
+void ABasicGameCharacter::CombatE() {
+	if ((InCombat == true) && (CurrentKeyNum == 2))
+	{
+		CombatValue = CombatValue + 1;
+	}
+
+}
+
+void ABasicGameCharacter::CombatZ() {
+	if ((InCombat == true) && (CurrentKeyNum == 3))
+	{
+		CombatValue = CombatValue + 1;
+	}
+
+}
+
+void ABasicGameCharacter::CombatC() {
+	if ((InCombat == true) && (CurrentKeyNum == 4))
+	{
+		CombatValue = CombatValue + 1;
+	}
+
+}
+
+//Gets how much damage you have done
+float ABasicGameCharacter::GetCombatValue() {
+
+	return CombatValue;
+}
+
+//Decides if you won
+bool ABasicGameCharacter::CombatWin() {
+	if (CombatValue > 5) {
+
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+//Randomizer for QTE
+int ABasicGameCharacter::KeyNumber() {
+	int keynum = rand() % 4 + 1;
+	//Q = 1, E + 2, Z = 3, C = 4
+	return keynum;
+}
+
+void ABasicGameCharacter::AssignCurrnetKeyNum() {
+	CurrentKeyNum = KeyNumber();
 }
