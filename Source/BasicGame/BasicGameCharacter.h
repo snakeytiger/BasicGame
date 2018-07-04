@@ -52,8 +52,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		bool InCombat;
 
-	UFUNCTION(BlueprintCallable, Category = "Combat")
-		char Key();
 
 	//Current Random Number
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")

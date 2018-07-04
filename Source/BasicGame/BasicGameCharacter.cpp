@@ -232,18 +232,3 @@ int ABasicGameCharacter::KeyNumber() {
 void ABasicGameCharacter::AssignCurrnetKeyNum() {
 	CurrentKeyNum = KeyNumber();
 }
-
-char ABasicGameCharacter::Key() {
-	if (CurrentKeyNum == 1) {
-		return 'Q';
-	}
-	else if (CurrentKeyNum == 2) {
-		return 'E';
-	}
-	else if (CurrentKeyNum == 3) {
-		return 'Z';
-	}
-	else {
-		return 'C';
-	}
-}
