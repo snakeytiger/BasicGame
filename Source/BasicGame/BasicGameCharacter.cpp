@@ -48,6 +48,7 @@ ABasicGameCharacter::ABasicGameCharacter()
 	IsAlive = true;
 	IsCrouch = false;
 	InCombat = false;
+	CurrentKeyNum = 0;
 
 	SlowTimeTime = 3.0f;
 
@@ -173,7 +174,7 @@ void ABasicGameCharacter::UpdateHealth(float Damage) {
 }
 
 void ABasicGameCharacter::CombatQ() {
-	if (InCombat == true)
+	if ((InCombat == true) && (CurrentKeyNum == 1))
 	{
 		CombatValue = CombatValue + 1;
 	}
@@ -181,7 +182,7 @@ void ABasicGameCharacter::CombatQ() {
 }
 
 void ABasicGameCharacter::CombatE() {
-	if (InCombat == true)
+	if ((InCombat == true) && (CurrentKeyNum == 2))
 	{
 		CombatValue = CombatValue + 1;
 	}
@@ -189,7 +190,7 @@ void ABasicGameCharacter::CombatE() {
 }
 
 void ABasicGameCharacter::CombatZ() {
-	if (InCombat == true)
+	if ((InCombat == true) && (CurrentKeyNum == 3))
 	{
 		CombatValue = CombatValue + 1;
 	}
@@ -197,18 +198,20 @@ void ABasicGameCharacter::CombatZ() {
 }
 
 void ABasicGameCharacter::CombatC() {
-	if (InCombat == true)
+	if ((InCombat == true) && (CurrentKeyNum == 4))
 	{
 		CombatValue = CombatValue + 1;
 	}
 
 }
 
+//Gets how much damage you have done
 float ABasicGameCharacter::GetCombatValue() {
 
 	return CombatValue;
 }
 
+//Decides if you won
 bool ABasicGameCharacter::CombatWin() {
 	if (CombatValue > 5) {
 
@@ -216,5 +219,31 @@ bool ABasicGameCharacter::CombatWin() {
 	}
 	else {
 		return false;
+	}
+}
+
+//Randomizer for QTE
+int ABasicGameCharacter::KeyNumber() {
+	int keynum = rand() % 4 + 1;
+	//Q = 1, E + 2, Z = 3, C = 4
+	return keynum;
+}
+
+void ABasicGameCharacter::AssignCurrnetKeyNum() {
+	CurrentKeyNum = KeyNumber();
+}
+
+char ABasicGameCharacter::Key() {
+	if (CurrentKeyNum == 1) {
+		return 'Q';
+	}
+	else if (CurrentKeyNum == 2) {
+		return 'E';
+	}
+	else if (CurrentKeyNum == 3) {
+		return 'Z';
+	}
+	else {
+		return 'C';
 	}
 }

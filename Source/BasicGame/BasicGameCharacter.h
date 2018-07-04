@@ -28,9 +28,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		float CharacterHealth;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Combat")
-		int KeyNumber1;
-
 	UFUNCTION(BlueprintPure, Category = "Stats")
 		float GetStartingHealth();
 
@@ -54,6 +51,13 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		bool InCombat;
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		char Key();
+
+	//Current Random Number
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		int CurrentKeyNum;
 
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
@@ -83,6 +87,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		bool IsAlive;
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		int KeyNumber();
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void AssignCurrnetKeyNum();
 
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 		bool CombatWin();
