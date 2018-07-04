@@ -48,7 +48,7 @@ ABasicGameCharacter::ABasicGameCharacter()
 	IsAlive = true;
 	IsCrouch = false;
 	InCombat = false;
-	KeyNumber1 = 0
+	CurrentKeyNum = 0;
 
 	SlowTimeTime = 3.0f;
 
@@ -70,6 +70,8 @@ void ABasicGameCharacter::SetupPlayerInputComponent(class UInputComponent* Playe
 	//Combat Key Values
 	PlayerInputComponent->BindAction("CombatQ", IE_Pressed, this, &ABasicGameCharacter::CombatQ);
 	PlayerInputComponent->BindAction("CombatE", IE_Pressed, this, &ABasicGameCharacter::CombatE);
+	PlayerInputComponent->BindAction("CombatZ", IE_Pressed, this, &ABasicGameCharacter::CombatZ);
+	PlayerInputComponent->BindAction("CombatC", IE_Pressed, this, &ABasicGameCharacter::CombatC);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ABasicGameCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABasicGameCharacter::MoveRight);
@@ -172,7 +174,7 @@ void ABasicGameCharacter::UpdateHealth(float Damage) {
 }
 
 void ABasicGameCharacter::CombatQ() {
-	if (InCombat == true)
+	if ((InCombat == true) && (CurrentKeyNum == 1))
 	{
 		CombatValue = CombatValue + 1;
 	}
@@ -180,18 +182,36 @@ void ABasicGameCharacter::CombatQ() {
 }
 
 void ABasicGameCharacter::CombatE() {
-	if (InCombat == true)
+	if ((InCombat == true) && (CurrentKeyNum == 2))
 	{
 		CombatValue = CombatValue + 1;
 	}
 
 }
 
+void ABasicGameCharacter::CombatZ() {
+	if ((InCombat == true) && (CurrentKeyNum == 3))
+	{
+		CombatValue = CombatValue + 1;
+	}
+
+}
+
+void ABasicGameCharacter::CombatC() {
+	if ((InCombat == true) && (CurrentKeyNum == 4))
+	{
+		CombatValue = CombatValue + 1;
+	}
+
+}
+
+//Gets how much damage you have done
 float ABasicGameCharacter::GetCombatValue() {
 
 	return CombatValue;
 }
 
+//Decides if you won
 bool ABasicGameCharacter::CombatWin() {
 	if (CombatValue > 5) {
 
@@ -202,10 +222,28 @@ bool ABasicGameCharacter::CombatWin() {
 	}
 }
 
-int ABasicGameCharacter::GetCKey1() {
+//Randomizer for QTE
+int ABasicGameCharacter::KeyNumber() {
 	int keynum = rand() % 4 + 1;
-	// 1 = Q, 2 = E, 3 = Z. 4 = C
-
+	//Q = 1, E + 2, Z = 3, C = 4
 	return keynum;
+}
 
+void ABasicGameCharacter::AssignCurrnetKeyNum() {
+	CurrentKeyNum = KeyNumber();
+}
+
+char ABasicGameCharacter::Key() {
+	if (CurrentKeyNum == 1) {
+		return 'Q';
+	}
+	else if (CurrentKeyNum == 2) {
+		return 'E';
+	}
+	else if (CurrentKeyNum == 3) {
+		return 'Z';
+	}
+	else {
+		return 'C';
+	}
 }
