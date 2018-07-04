@@ -38,7 +38,11 @@ public:
 		float GetBaseSpeed();
 
 	UFUNCTION(BlueprintCallable, Category = "Stats")
-		void UpdateSpeed();
+		void UpdateSpeed(float SpeedUpdate);
+
+	//Max speed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+		float MaxSpeed;
 
 	//Health
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
