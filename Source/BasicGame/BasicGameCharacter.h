@@ -57,6 +57,18 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		int CurrentKeyNum;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		int ActiveKeyNum1;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		int ActiveKeyNum2;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		int ActiveKeyNum3;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		int ActiveKeyNum4;
+
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -90,10 +102,13 @@ protected:
 		int KeyNumber();
 
 	UFUNCTION(BlueprintCallable, Category = "Combat")
-		void AssignCurrnetKeyNum();
+		void AssignCurrnetKeyNum(int AKN);
 
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 		bool CombatWin();
+	//Gets the active keys
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void CreateActiveKeys();
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();

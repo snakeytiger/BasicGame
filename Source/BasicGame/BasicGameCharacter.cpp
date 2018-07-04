@@ -49,6 +49,10 @@ ABasicGameCharacter::ABasicGameCharacter()
 	Crouching = false;
 	InCombat = false;
 	CurrentKeyNum = 0;
+	ActiveKeyNum1 = 0;
+	ActiveKeyNum2 = 0;
+	ActiveKeyNum3 = 0;
+	ActiveKeyNum4 = 0;
 
 	SlowTimeTime = 3.0f;
 
@@ -178,6 +182,9 @@ void ABasicGameCharacter::CombatQ() {
 	{
 		CombatValue = CombatValue + 1;
 	}
+	else {
+		CombatValue = -1;
+	}
 	
 }
 
@@ -185,6 +192,9 @@ void ABasicGameCharacter::CombatE() {
 	if ((InCombat == true) && (CurrentKeyNum == 2))
 	{
 		CombatValue = CombatValue + 1;
+	}
+	else {
+		CombatValue = -1;
 	}
 
 }
@@ -194,6 +204,9 @@ void ABasicGameCharacter::CombatZ() {
 	{
 		CombatValue = CombatValue + 1;
 	}
+	else {
+		CombatValue = -1;
+	}
 
 }
 
@@ -201,6 +214,9 @@ void ABasicGameCharacter::CombatC() {
 	if ((InCombat == true) && (CurrentKeyNum == 4))
 	{
 		CombatValue = CombatValue + 1;
+	}
+	else {
+		CombatValue = -1;
 	}
 
 }
@@ -213,7 +229,7 @@ float ABasicGameCharacter::GetCombatValue() {
 
 //Decides if you won
 bool ABasicGameCharacter::CombatWin() {
-	if (CombatValue > 5) {
+	if (CombatValue >= 3) {
 
 		return true;
 	}
@@ -224,11 +240,56 @@ bool ABasicGameCharacter::CombatWin() {
 
 //Randomizer for QTE
 int ABasicGameCharacter::KeyNumber() {
-	int keynum = rand() % 4 + 1;
-	//Q = 1, E + 2, Z = 3, C = 4
-	return keynum;
+	
+		int keynum = rand() % 4 + 1;
+		//Q = 1, E + 2, Z = 3, C = 4
+		return keynum;
+	}
+
+	
+
+void ABasicGameCharacter::AssignCurrnetKeyNum(int AKN) {
+	if (AKN == 1) {
+		CurrentKeyNum = ActiveKeyNum1;
+	}
+	else if (AKN == 2) {
+		CurrentKeyNum = ActiveKeyNum2;
+	}
+	else if (AKN == 3) {
+		CurrentKeyNum = ActiveKeyNum3;
+	}
+	else {
+		CurrentKeyNum = ActiveKeyNum4;
+	}
+	
 }
 
-void ABasicGameCharacter::AssignCurrnetKeyNum() {
-	CurrentKeyNum = KeyNumber();
+void ABasicGameCharacter::CreateActiveKeys() {
+	ActiveKeyNum1 = KeyNumber();
+	ActiveKeyNum2 = KeyNumber();
+	ActiveKeyNum3 = KeyNumber();
+	ActiveKeyNum4 = KeyNumber();
+	while (true) {
+		if (ActiveKeyNum1 == ActiveKeyNum2) {
+			ActiveKeyNum2 = KeyNumber();
+		}
+		else if (ActiveKeyNum1 == ActiveKeyNum3) {
+			ActiveKeyNum3 = KeyNumber();
+		}
+		else if (ActiveKeyNum1 == ActiveKeyNum4) {
+			ActiveKeyNum4 = KeyNumber();
+		}
+		else if (ActiveKeyNum2 == ActiveKeyNum3) {
+			ActiveKeyNum3 = KeyNumber();
+		}
+		else if (ActiveKeyNum2 == ActiveKeyNum4) {
+			ActiveKeyNum4 = KeyNumber();
+		}
+		else if (ActiveKeyNum3 == ActiveKeyNum4) {
+			ActiveKeyNum4 = KeyNumber();
+		}
+		else {
+			break;
+		}
+	}
 }
