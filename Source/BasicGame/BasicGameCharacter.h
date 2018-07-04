@@ -24,6 +24,26 @@ public:
 	//Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	//Constantly increasing speed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+		float BaseSpeed;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+		float CurrentSpeed;
+
+	UFUNCTION(BlueprintPure, Category = "Stats")
+		float GetCurrentSpeed();
+
+	UFUNCTION(BlueprintPure, Category = "Stats")
+		float GetBaseSpeed();
+
+	UFUNCTION(BlueprintCallable, Category = "Stats")
+		void UpdateSpeed(float SpeedUpdate);
+
+	//Max speed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+		float MaxSpeed;
+
 	//Health
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		float CharacterHealth;
@@ -56,6 +76,18 @@ public:
 	//Current Random Number
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		int CurrentKeyNum;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		int ActiveKeyNum1;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		int ActiveKeyNum2;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		int ActiveKeyNum3;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		int ActiveKeyNum4;
 
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
@@ -90,10 +122,13 @@ protected:
 		int KeyNumber();
 
 	UFUNCTION(BlueprintCallable, Category = "Combat")
-		void AssignCurrnetKeyNum();
+		void AssignCurrnetKeyNum(int AKN);
 
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 		bool CombatWin();
+	//Gets the active keys
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void CreateActiveKeys();
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();
