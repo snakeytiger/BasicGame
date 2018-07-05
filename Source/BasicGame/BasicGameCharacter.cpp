@@ -53,6 +53,10 @@ ABasicGameCharacter::ABasicGameCharacter()
 	ActiveKeyNum2 = 0;
 	ActiveKeyNum3 = 0;
 	ActiveKeyNum4 = 0;
+	MaxSpeed = 1500;
+	BaseSpeed = 500;
+	CurrentSpeed = 500;
+	
 
 	SlowTimeTime = 3.0f;
 
@@ -291,5 +295,30 @@ void ABasicGameCharacter::CreateActiveKeys() {
 		else {
 			break;
 		}
+	}
+}
+
+//Gets current speed
+float ABasicGameCharacter::GetCurrentSpeed() {
+
+	return CurrentSpeed;
+}
+
+//Gets base speed
+float ABasicGameCharacter::GetBaseSpeed() {
+
+	return BaseSpeed;
+}
+
+void ABasicGameCharacter::UpdateSpeed(float SpeedUpdate) {
+
+	CurrentSpeed = GetCurrentSpeed() + SpeedUpdate;
+
+	if (GetCurrentSpeed() > MaxSpeed) {
+		CurrentSpeed = MaxSpeed;
+	}
+
+	if (GetCurrentSpeed() < 0) {
+		CurrentSpeed = 0;
 	}
 }
