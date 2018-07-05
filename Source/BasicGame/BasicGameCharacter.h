@@ -117,6 +117,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		bool IsAlive;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+		bool IsDead;
 
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 		int KeyNumber();
