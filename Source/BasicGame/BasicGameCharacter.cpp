@@ -56,7 +56,9 @@ ABasicGameCharacter::ABasicGameCharacter()
 	ActiveKeyNum4 = 0;
 	MaxSpeed = 1500;
 	BaseSpeed = 500;
+	HurtSpeed = 300;
 	CurrentSpeed = 500;
+	WinCondition = false;
 	
 
 	SlowTimeTime = 3.0f;
