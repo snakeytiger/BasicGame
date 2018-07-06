@@ -39,6 +39,11 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Stats")
 		void UpdateSpeed(float SpeedUpdate);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+		float HurtSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+		bool WinCondition;
 
 	//Max speed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
