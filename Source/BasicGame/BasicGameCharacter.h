@@ -27,6 +27,27 @@ public:
 	//Constantly increasing speed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		float BaseSpeed;
+
+	//Shows if character parried
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		bool Parried;
+
+	//Damage Stat
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		float DamageStat;
+	
+
+	//Number of Attacks (1 = PARRY)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		int AttackNum;
+
+	//Increase AttackNum by 1
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void NextAttack();
+
+	//Checks if correct keys are pressed
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void CombatSystem(float CombatValue, int EnemyHealth);
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 		float CurrentSpeed;
@@ -62,8 +83,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Stats")
 		void UpdateHealth(float Damage);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
-		bool Crouching;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Timer")
 		float SlowTimeTime;

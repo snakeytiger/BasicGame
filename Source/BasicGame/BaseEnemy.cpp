@@ -32,3 +32,7 @@ void ABaseEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 }
 
+void ABaseEnemy::UpdateHealth(float dmg)
+{
+	CurrentHealth = CurrentHealth - dmg;
+}

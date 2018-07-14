@@ -47,7 +47,6 @@ ABasicGameCharacter::ABasicGameCharacter()
 	StartingHealth = 5.0f;
 	IsAlive = true;
 	IsDead = false;
-	Crouching = false;
 	InCombat = false;
 	CurrentKeyNum = 0;
 	ActiveKeyNum1 = 0;
@@ -58,7 +57,9 @@ ABasicGameCharacter::ABasicGameCharacter()
 	BaseSpeed = 500;
 	HurtSpeed = 300;
 	CurrentSpeed = 500;
+	AttackNum = 0;
 	WinCondition = false;
+	Parried = false;
 	
 
 	SlowTimeTime = 3.0f;
@@ -187,7 +188,7 @@ void ABasicGameCharacter::UpdateHealth(float Damage) {
 void ABasicGameCharacter::CombatQ() {
 	if ((InCombat == true) && (CurrentKeyNum == 1))
 	{
-		CombatValue = CombatValue + 1;
+		CombatValue = 1;
 	}
 	else {
 		CombatValue = -1;
@@ -198,7 +199,7 @@ void ABasicGameCharacter::CombatQ() {
 void ABasicGameCharacter::CombatE() {
 	if ((InCombat == true) && (CurrentKeyNum == 2))
 	{
-		CombatValue = CombatValue + 1;
+		CombatValue = 2;
 	}
 	else {
 		CombatValue = -1;
@@ -209,7 +210,7 @@ void ABasicGameCharacter::CombatE() {
 void ABasicGameCharacter::CombatZ() {
 	if ((InCombat == true) && (CurrentKeyNum == 3))
 	{
-		CombatValue = CombatValue + 1;
+		CombatValue = 3;
 	}
 	else {
 		CombatValue = -1;
@@ -220,7 +221,7 @@ void ABasicGameCharacter::CombatZ() {
 void ABasicGameCharacter::CombatC() {
 	if ((InCombat == true) && (CurrentKeyNum == 4))
 	{
-		CombatValue = CombatValue + 1;
+		CombatValue = 4;
 	}
 	else {
 		CombatValue = -1;
@@ -325,3 +326,43 @@ void ABasicGameCharacter::UpdateSpeed(float SpeedUpdate) {
 		CurrentSpeed = 0;
 	}
 }
+
+
+//PARRY COMBAT SYSTEM ---------------------------------
+//increases attack number 
+void ABasicGameCharacter::NextAttack()
+	{
+	AttackNum = AttackNum + 1;
+	}
+
+void ABasicGameCharacter::CombatSystem(float CombatValue, int EnemyHealth)
+{
+	int NewKey;
+	if (NewKey == CurrentKeyNum)
+		{
+			int NewKey = KeyNumber();
+			
+		}
+	else
+		{
+		if (CombatValue == CurrentKeyNum)
+			{
+			if (AttackNum == 1)
+				{
+				Parried = true;
+				AttackNum++;
+				NewKey = KeyNumber();
+				}
+			else if (AttackNum == -1)
+				{
+				
+				}
+			else
+				{
+				AttackNum++;
+				NewKey = KeyNumber();
+				}
+			}
+		}
+}
+
