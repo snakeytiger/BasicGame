@@ -337,7 +337,7 @@ void ABasicGameCharacter::NextAttack()
 
 void ABasicGameCharacter::CombatSystem(float CombatValue, int EnemyHealth)
 {
-	int NewKey;
+	int NewKey = 0;
 	if (NewKey == CurrentKeyNum)
 		{
 			int NewKey = KeyNumber();
